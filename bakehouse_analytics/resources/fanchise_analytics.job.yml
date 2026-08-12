@@ -1,0 +1,32 @@
+resources:
+  jobs:
+    fanchise_analytics:
+      name: fanchise_analytics
+      tasks:
+        - task_key: fanchise_analytics
+          disabled: false
+          email_notifications: {}
+          environment_key: Default
+          notebook_task:
+            notebook_path: ../src/fanchise_analytics/fanchise_analytics.ipynb
+            source: WORKSPACE
+          run_if: ALL_SUCCESS
+          timeout_seconds: 0
+          webhook_notifications: {}
+      parameters:
+        - name: catalog
+          default: bakehouse_analytics_dev
+        - name: schema
+          default: rnd
+      email_notifications:
+        no_alert_for_skipped_runs: false
+      environments:
+        - environment_key: Default
+          spec:
+            environment_version: "5"
+      max_concurrent_runs: 1
+      performance_target: PERFORMANCE_OPTIMIZED
+      queue:
+        enabled: true
+      timeout_seconds: 0
+      webhook_notifications: {}
